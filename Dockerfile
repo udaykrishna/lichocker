@@ -57,6 +57,14 @@ RUN useradd -ms /bin/bash lichess \
     && apt-get clean \
     && /root/.cargo/bin/rustup self uninstall -y
 
+WORKDIR /home/lichess
+
+RUN cd /home/lichess/projects \
+    && git clone --recursive https://github.com/ornicar/lila.git \
+    && cp lila/bin/dev.default lila/bin/dev \
+    && chmod +x lila/bin/dev \
+    && cp lila/conf/application.conf.default lila/conf/application.conf
+    
 ADD run.sh /home/lichess/run.sh
 ADD nginx.conf /etc/nginx/nginx.conf
 
@@ -69,6 +77,5 @@ USER lichess
 
 EXPOSE 80
 
-WORKDIR /home/lichess
-
-ENTRYPOINT ./run.sh
+RUN ./run.sh
+RUN /home/lichess/projects/lila/bin/dev run
