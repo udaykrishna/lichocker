@@ -59,7 +59,8 @@ RUN useradd -ms /bin/bash lichess \
 
 WORKDIR /home/lichess
 
-RUN cd /home/lichess/projects \
+RUN mkdir /home/lichess/projects \
+    && cd /home/lichess/projects \
     && git clone --recursive https://github.com/ornicar/lila.git \
     && cp lila/bin/dev.default lila/bin/dev \
     && chmod +x lila/bin/dev \
