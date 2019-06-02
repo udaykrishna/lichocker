@@ -79,4 +79,6 @@ USER lichess
 EXPOSE 80
 
 RUN ./run.sh
-RUN /home/lichess/projects/lila/bin/dev run
+RUN cd cd /home/lichess/projects/lila && /home/lichess/projects/lila/bin/dev run
+# I'm not sure if this will start the server probably we would have to run it again so check 
+CMD sh
